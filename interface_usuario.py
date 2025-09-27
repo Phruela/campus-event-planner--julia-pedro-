@@ -14,3 +14,20 @@ def display_menu():
     6. Excluir Evento
     7. Sair
     ''')
+
+def get_escolha():
+    '''Lê e valida a escolha do usuário no menu
+    
+    Solicita que o usuário informe um número em um loop 
+    até que seja informada uma entrada válida
+    
+    Returns:
+        int: O número inteiro correspondente  à opção escolhida pelo usuário
+    '''
+
+    while(True):
+        try:
+            escolha = int(input("Esolha uma opção: "))
+            return escolha
+        except ValueError:
+            print('Informe um número inteiro válido')
