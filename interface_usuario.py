@@ -52,7 +52,7 @@ def filtrar_por_categoria(lista_eventos, categoria):
 
     eventos_filtrados = [
         evento for evento in lista_eventos
-        if categoria.lower() == evento['Categoria'].lower()
+        if categoria.lower() == evento['categoria'].lower()
     ]
     print(f'--- Eventos na categoria: {categoria} ---')
     if not eventos_filtrados:
@@ -76,13 +76,13 @@ def marcar_evento_atendido(lista_eventos, id_informado):
 
     for evento in lista_eventos:
         if evento['id'] == id_informado:
-            if evento['participacao']:
+            if evento['participou']:
                 print(f'A Participação no evento {evento['nome']} já estava confirmada')
             else:
-                evento['participacao'] = True
+                evento['participou'] = True
                 print(f'Participação no evento {evento['nome']} confirmada')
             return
-    print(f'Nenhum evento com o ID {evento['id_informado']} encontrado.')
+    print(f'Nenhum evento com o ID {id_informado} encontrado.')
 
 
 def gerar_relatorio(lista_eventos):
@@ -105,7 +105,7 @@ def gerar_relatorio(lista_eventos):
     contagem_categorias = Counter(lista_categorias)
     total_participacoes = 0
     for evento in lista_eventos:
-        if evento['participacao']:
+        if evento['participou']:
             total_participacoes += 1
     porcentagem_participacoes = (total_participacoes / total_eventos) * 100
 
