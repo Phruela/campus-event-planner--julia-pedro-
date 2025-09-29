@@ -31,3 +31,27 @@ def get_escolha():
             return escolha
         except ValueError:
             print('Informe um número inteiro válido')
+
+def filtrar_por_categoria(lista_eventos, categoria):
+'''Filtra e exibe os eventos da categoria selecionada.
+
+A função percorre a lista de eventos e imprime os eventos 
+que pertencem à categoria fornecida. Se nenhum evento for 
+encontrado a função retorna uma mensagem informando que 
+nenhum evento foi encontrado.
+
+Args:
+    lista_eventos (lista): A lista de dicionários dos eventos.
+    categoria (str): A categoria que irá filtrar os eventos.
+'''
+
+    eventos_filtrados = [
+        evento for evento in lista_eventos
+        if categoria.lower() == evento['Categoria'].lower()
+    ]
+    print(f'=== Eventos na categoria: {categoria} ===')
+    if not eventos_filtrados:
+        print('Nenhum evento cadastrado nessa categoria.')
+    else: 
+        for evento in eventos_filtrados:
+            print(f'ID: {evento['id']} - {evento['nome']}')
