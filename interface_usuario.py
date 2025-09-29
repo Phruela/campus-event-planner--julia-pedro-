@@ -31,7 +31,7 @@ def get_escolha():
 
     while(True):
         try:
-            escolha = int(input("Esolha uma opção: "))
+            escolha = int(input("Escolha uma opção: "))
             return escolha
         except ValueError:
             print('Informe um número inteiro válido')
