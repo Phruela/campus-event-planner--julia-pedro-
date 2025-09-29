@@ -1,10 +1,12 @@
 from collections import Counter
+import time
+import os
 
 def display_menu():
     '''Exibe o menu principal para o usuário.
     
     Imprime todas as opções disponíveis que o usuário
-    pode escolher para gerenciar os eventos
+    pode escolher para gerenciar os eventos.
     '''
 
     print('''
@@ -20,21 +22,26 @@ def display_menu():
 
 
 def get_escolha():
-    '''Lê e valida a escolha do usuário no menu
+    '''Lê e valida a escolha do usuário no menu.
     
-    Solicita que o usuário informe um número em um loop 
-    até que seja informada uma entrada válida
+    Limpa o terminal, chama a função display_menu e
+    solicita que o usuário informe um número em um loop 
+    até que seja informada uma entrada válida.
     
     Returns:
-        int: O número inteiro correspondente  à opção escolhida pelo usuário
+        int: O número inteiro correspondente  à opção escolhida pelo usuário.
     '''
 
     while(True):
+        os.system("cls" if os.name == "nt" else "clear")
+        display_menu()
         try:
-            escolha = int(input("Esolha uma opção: "))
+            escolha = int(input("Escolha uma opção: "))
             return escolha
         except ValueError:
             print('Informe um número inteiro válido')
+            time.sleep(2)
+            continue
 
 
 def filtrar_por_categoria(lista_eventos, categoria):
@@ -52,7 +59,7 @@ def filtrar_por_categoria(lista_eventos, categoria):
 
     eventos_filtrados = [
         evento for evento in lista_eventos
-        if categoria.lower() == evento['Categoria'].lower()
+        if categoria.lower() == evento['categoria'].lower()
     ]
     print(f'--- Eventos na categoria: {categoria} ---')
     if not eventos_filtrados:
@@ -76,13 +83,13 @@ def marcar_evento_atendido(lista_eventos, id_informado):
 
     for evento in lista_eventos:
         if evento['id'] == id_informado:
-            if evento['participacao']:
+            if evento['participou']:
                 print(f'A Participação no evento {evento['nome']} já estava confirmada')
             else:
-                evento['participacao'] = True
+                evento['participou'] = True
                 print(f'Participação no evento {evento['nome']} confirmada')
             return
-    print(f'Nenhum evento com o ID {evento['id_informado']} encontrado.')
+    print(f'Nenhum evento com o ID {id_informado} encontrado.')
 
 
 def gerar_relatorio(lista_eventos):
@@ -105,7 +112,7 @@ def gerar_relatorio(lista_eventos):
     contagem_categorias = Counter(lista_categorias)
     total_participacoes = 0
     for evento in lista_eventos:
-        if evento['participacao']:
+        if evento['participou']:
             total_participacoes += 1
     porcentagem_participacoes = (total_participacoes / total_eventos) * 100
 
