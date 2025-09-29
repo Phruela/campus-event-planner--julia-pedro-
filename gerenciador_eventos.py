@@ -35,7 +35,7 @@ def adicionar_evento(lista_eventos):
         "data": data,
         "local": local,
         "categoria": categoria,
-        "participacao": False
+        "participou": False
     }
     
     lista_eventos.append(novo_evento)
@@ -52,6 +52,6 @@ def listar_eventos(lista_eventos):
         return
 
     for i, evento in enumerate(lista_eventos, start=1):
-        status = "SIM" if evento["participacao"] else "NÃO"
+        status = "SIM" if evento["participou"] else "NÃO"
         print(f"{i}. Nome: {evento['nome']} | Data: {evento['data']} | Local: {evento['local']} | Participou: {status}")
 
