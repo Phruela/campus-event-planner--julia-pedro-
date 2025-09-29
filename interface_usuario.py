@@ -1,10 +1,12 @@
 from collections import Counter
+import time
+import os
 
 def display_menu():
     '''Exibe o menu principal para o usuário.
     
     Imprime todas as opções disponíveis que o usuário
-    pode escolher para gerenciar os eventos
+    pode escolher para gerenciar os eventos.
     '''
 
     print('''
@@ -20,21 +22,26 @@ def display_menu():
 
 
 def get_escolha():
-    '''Lê e valida a escolha do usuário no menu
+    '''Lê e valida a escolha do usuário no menu.
     
-    Solicita que o usuário informe um número em um loop 
-    até que seja informada uma entrada válida
+    Limpa o terminal, chama a função display_menu e
+    solicita que o usuário informe um número em um loop 
+    até que seja informada uma entrada válida.
     
     Returns:
-        int: O número inteiro correspondente  à opção escolhida pelo usuário
+        int: O número inteiro correspondente  à opção escolhida pelo usuário.
     '''
 
     while(True):
+        os.system("cls" if os.name == "nt" else "clear")
+        display_menu()
         try:
             escolha = int(input("Escolha uma opção: "))
             return escolha
         except ValueError:
             print('Informe um número inteiro válido')
+            time.sleep(2)
+            continue
 
 
 def filtrar_por_categoria(lista_eventos, categoria):
