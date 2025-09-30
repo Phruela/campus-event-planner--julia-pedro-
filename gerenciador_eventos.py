@@ -55,3 +55,18 @@ def listar_eventos(lista_eventos):
         status = "SIM" if evento["participou"] else "NÃO"
         print(f"{i}. Nome: {evento['nome']} | Data: {evento['data']} | Local: {evento['local']} | Participou: {status}")
 
+def remover_evento(lista_eventos, id_para_remover):
+    """Busca um evento pelo seu ID e o remove da lista."""
+    evento_para_remover = None
+    for evento in lista_eventos:
+        if evento['id'] == id_para_remover:
+            evento_para_remover = evento
+            break  
+
+    if evento_para_remover:
+        lista_eventos.remove(evento_para_remover)
+        print(f"\nO evento '{evento_para_remover['nome']}' foi removido com sucesso.")
+        return True  
+    else:
+        print(f"\nErro: Evento com ID {id_para_remover} não foi encontrado.")
+        return False 
